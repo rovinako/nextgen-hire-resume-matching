@@ -1,23 +1,20 @@
 import pandas as pd
 import os
 
-# Load dataset
 df = pd.read_csv("data/resumes.csv")
 
-# Make output folder
-os.makedirs("sample_resumes", exist_ok=True)
+hr_df = df[df["Category"].str.contains("HR", case=False, na=False)]
 
-# Pick 10 random resumes
-sample_df = df.sample(10, random_state=42)
+output_folder = "sample_resumes"
+os.makedirs(output_folder, exist_ok=True)
+
+sample_df = hr_df.sample(n=min(10, len(hr_df)), random_state=42)
 
 for i, row in sample_df.iterrows():
     text = row["Resume_str"]
-    category = row["Category"]
+    filename = f"hr_resume_{i}.txt"
 
-    filename = f"resume_{i}_{category}.txt"
-    filepath = os.path.join("sample_resumes", filename)
-
-    with open(filepath, "w", encoding="utf-8") as f:
+    with open(os.path.join(output_folder, filename), "w", encoding="utf-8") as f:
         f.write(text)
 
-print("Sample resumes created in /sample_resumes/")
+print(f"{len(sample_df)} HR resumes saved to '{output_folder}/'")

@@ -1,5 +1,4 @@
 # nextgen-hire-resume-matching
-# NextGen Hire
 
 NextGen Hire is an AI-based Resume–Job Matching System. The goal of the project is to help recruiters compare resumes with a job description and identify the most suitable candidates using Natural Language Processing (NLP).
 
